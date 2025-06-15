@@ -1,7 +1,7 @@
 //! import "util/Tool.j" 
 
 library Item
-    //定义装备基类
+    //定义击杀升级装备的基类
     struct ItemClass
         private integer itemId
         private integer killCount
@@ -31,12 +31,14 @@ library Item
         method OnUnitKill takes nothing returns nothing
             local unit killer = GetKillingUnit()
             local integer pid = GetPlayerId(GetOwningPlayer(killer))
-    
+            local integer itemId = 'rat6'
+
             if hasCloak[pid] then
                 set killCount = killCount + 1    
-                if killCount > killThreshold then
-                    call DisplayTextToPlayer(GetOwningPlayer(killer), 0, 0, "你已击杀超过10个敌人，魔法斗篷已移除！")
-                    call ItemToolClass.RemoveItemTypeFromUnit(killer, killItem)
+                if killCount == killThreshold then
+                    // call DisplayTextToPlayer(GetOwningPlayer(killer), 0, 0, "你已击杀超过10个敌人，魔法斗篷已移除！")
+                    call ItemToolClass.RemoveItemTypeFromUnit(killer, this.itemId)
+                    call ItemToolClass.AddNewItemToPlayer(killer, itemId)
                     set hasCloak[pid] = false
                 endif
             endif

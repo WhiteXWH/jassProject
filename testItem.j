@@ -1,4 +1,4 @@
-//! import "util/Item.j"
+//! import "item/Item.j"
 
 library testItem initializer InitTrig_MagicCloakLogic
     globals 
@@ -24,7 +24,6 @@ library testItem initializer InitTrig_MagicCloakLogic
         // 注册所有玩家拾取物品事件
         loop
             exitwhen i == bj_MAX_PLAYERS
-            // call BJDebugMsg("注册玩家" + I2S(i) + "的拾取物品事件")
             call TriggerRegisterPlayerUnitEvent(t1, Player(i), EVENT_PLAYER_UNIT_PICKUP_ITEM, null)
             call TriggerRegisterPlayerUnitEvent(t2, Player(i), EVENT_PLAYER_UNIT_DEATH, null)
             set i = i + 1
@@ -32,6 +31,5 @@ library testItem initializer InitTrig_MagicCloakLogic
         
         call TriggerAddAction(t1, function OnItemPickupDelegate)
         call TriggerAddAction(t2, function OnUnitKillDelegate)
-        call gcItem.destroy()
     endfunction
 endlibrary

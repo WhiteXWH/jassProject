@@ -17,6 +17,20 @@ library Tool
                 set i = i + 1
             endloop
         endmethod
+        
+
+        //给玩家单位添加某件装备
+        static method AddNewItemToPlayer takes unit whichUnit, integer newItemId returns nothing
+            local item newItem
+        
+            // 创建新物品
+            set newItem = CreateItem(newItemId, GetUnitX(whichUnit), GetUnitY(whichUnit))
+        
+            // 添加到单位身上
+            call UnitAddItem(whichUnit, newItem)
+        endmethod
+        
+
     endstruct
 
 endlibrary

@@ -1,1 +1,1 @@
-##A project for WarRaft map edit
+A project for Warcraft map edit.
